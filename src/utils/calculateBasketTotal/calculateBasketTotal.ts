@@ -1,5 +1,10 @@
 import { Catalogue, Basket } from "../../App.types";
 
+const convertPriceInPenceToPound = (basketTotal: number) => {
+  const priceInGBP: number = basketTotal / 100
+  return priceInGBP.toFixed(2)
+}
+
 export const calculateBasketTotal = (basket:Basket, stock: Catalogue): string => {
   let basketTotal: number = 0;
 
@@ -26,11 +31,6 @@ export const calculateBasketTotal = (basket:Basket, stock: Catalogue): string =>
 
   const calculateNumberOfItemsThatDoNotQualifyForOffer = (totalNumberOfItem: number, countOfItemThatQualifyForOffer: number, minPurchaseRequirement: number ) => {
     return totalNumberOfItem - countOfItemThatQualifyForOffer * minPurchaseRequirement
-  }
-
-  const convertPriceInPenceToPound = (basketTotal: number) => {
-    const priceInGBP: number = basketTotal / 100
-    return priceInGBP.toFixed(2)
   }
 
   for (let item in basket) {

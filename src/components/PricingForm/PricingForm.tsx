@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Catalogue } from '../../App.types';
 import { updateStockContents, UpdateStockContentsProps } from '../../utils/updateStockContents/updateStockContents';
 import SkuForm from '../SkuForm/SkuForm';
@@ -27,7 +27,7 @@ const PricingForm: React.FC<Props> = ({ catalogue, setCatalogue, setPriceLoaded 
     setStock(updateStockContents(stockContentProps))
   };
 
-  const handleSubmit = (event: React.MouseEvent, stock: Catalogue) => {
+  const handleSubmit = (event: React.MouseEvent) => {
     event.preventDefault();
     setCatalogue(stock)
     setPriceLoaded(true)
@@ -41,7 +41,7 @@ const PricingForm: React.FC<Props> = ({ catalogue, setCatalogue, setPriceLoaded 
           return <SkuForm key={sku[0]} sku={sku} handleSetState={handleSetState} />;
         })}
         <br />
-        <button data-cy="SubmitPricingForm" onClick={(e) => handleSubmit(e, stock)}>Submit</button>
+        <button data-cy="SubmitPricingForm" onClick={(e) => handleSubmit(e)}>Submit</button>
       </form>
     </>
   );

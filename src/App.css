@@ -1,0 +1,61 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.shopContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.basketContainer {
+  display: flex;
+  flex-direction: column;
+}
+.basketItem {
+  border: 2px solid grey;
+  border-radius: 1rem;
+  margin: 1rem;
+}
+
+.pricingContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.stockContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+button {
+  transition-duration: 0.4s;
+  background-color: #21caca;
+  border: none;
+  padding: 0.5rem;
+}
+
+@media only screen and (max-width: 700px) {
+  .pricingContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 1rem;
+  }
+  .shopContainer {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-evenly;
+    padding: 3rem;
+  }
+  .basketContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+}

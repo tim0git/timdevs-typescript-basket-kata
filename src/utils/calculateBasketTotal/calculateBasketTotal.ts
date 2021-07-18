@@ -1,19 +1,55 @@
 import { Catalogue, Basket } from "../../App.types";
 
-export const calculateBasketTotal = (basket:Basket, stock: Catalogue) => {
-  let total = 0;
-  for (let item in basket) {
-    if (basket[item] >= stock[item].minPurchase && stock[item].minPurchase > 0) {
-      let offerCount = Math.floor(basket[item] / stock[item].minPurchase);
-      total += (offerCount * stock[item].offer) / 100;
-      if (basket[item] % stock[item].minPurchase) {
-        const remainderCount = basket[item] - offerCount * stock[item].minPurchase;
+export const calculateBasketTotal = (basket:Basket, stock: Catalogue): string => {
+  let basketTotal: number = 0;
 
-        total += (remainderCount * stock[item].price) / 100;
+  const itemIsEligibleForOffer = (totalNumberOfItem: number, minPurchaseRequirement: number): boolean => {
+    return totalNumberOfItem >= minPurchaseRequirement && minPurchaseRequirement > 0
+  }
+
+  const applyNormalPrice = (numberOfItems: number, item: string): number => {
+    return (numberOfItems * stock[item].price) / 100;
+  }
+
+  const applyOfferPrice = (countOfItemThatQualifyForOffer: number, item:string):number => {
+    return (countOfItemThatQualifyForOffer * stock[item].offer) / 100;
+  }
+
+  const calculateNumberOfItemThatQualifyForOffer = (totalNumberOfItem: number, minPurchaseRequirement: number ) => {
+    return Math.floor(totalNumberOfItem / minPurchaseRequirement)
+  }
+
+  const notAllItemsAreCoveredByAnOffer = (totalNumberOfItem: number, minPurchaseRequirement: number): boolean => {
+    const numberOfItemsNotEligibleForAnOffer = totalNumberOfItem % minPurchaseRequirement
+    return numberOfItemsNotEligibleForAnOffer !== 0
+  }
+
+  const calculateNumberOfItemsThatDoNotQualifyForOffer = (totalNumberOfItem: number, countOfItemThatQualifyForOffer: number, minPurchaseRequirement: number ) => {
+    return totalNumberOfItem - countOfItemThatQualifyForOffer * minPurchaseRequirement
+  }
+
+  for (let item in basket) {
+
+    const totalNumberOfItem = basket[item]
+    const minPurchaseRequirement = stock[item].minPurchase
+    
+    if (itemIsEligibleForOffer(totalNumberOfItem, minPurchaseRequirement)) {
+
+      const countOfItemThatQualifyForOffer = calculateNumberOfItemThatQualifyForOffer(totalNumberOfItem, minPurchaseRequirement);
+
+      basketTotal += applyOfferPrice(countOfItemThatQualifyForOffer, item)
+
+      if (notAllItemsAreCoveredByAnOffer(totalNumberOfItem, minPurchaseRequirement)) {
+        
+        const countOfItemThatDoNotQualifyForOffer = calculateNumberOfItemsThatDoNotQualifyForOffer(totalNumberOfItem, countOfItemThatQualifyForOffer, minPurchaseRequirement)
+
+        basketTotal += applyNormalPrice(countOfItemThatDoNotQualifyForOffer, item)
       }
+
     } else {
-      total += (stock[item].price * basket[item]) / 100;
+
+        basketTotal += applyNormalPrice(totalNumberOfItem, item)
     }
   }
-  return total.toFixed(2);
+  return basketTotal.toFixed(2);
 };

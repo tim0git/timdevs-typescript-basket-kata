@@ -8,11 +8,11 @@ export const calculateBasketTotal = (basket:Basket, stock: Catalogue): string =>
   }
 
   const applyNormalPrice = (numberOfItems: number, item: string): number => {
-    return (numberOfItems * stock[item].price) / 100;
+    return (numberOfItems * stock[item].price);
   }
 
   const applyOfferPrice = (countOfItemThatQualifyForOffer: number, item:string):number => {
-    return (countOfItemThatQualifyForOffer * stock[item].offer) / 100;
+    return (countOfItemThatQualifyForOffer * stock[item].offer);
   }
 
   const calculateNumberOfItemThatQualifyForOffer = (totalNumberOfItem: number, minPurchaseRequirement: number ) => {
@@ -26,6 +26,11 @@ export const calculateBasketTotal = (basket:Basket, stock: Catalogue): string =>
 
   const calculateNumberOfItemsThatDoNotQualifyForOffer = (totalNumberOfItem: number, countOfItemThatQualifyForOffer: number, minPurchaseRequirement: number ) => {
     return totalNumberOfItem - countOfItemThatQualifyForOffer * minPurchaseRequirement
+  }
+
+  const convertPriceInPenceToPound = (basketTotal: number) => {
+    const priceInGBP: number = basketTotal / 100
+    return priceInGBP.toFixed(2)
   }
 
   for (let item in basket) {
@@ -51,5 +56,5 @@ export const calculateBasketTotal = (basket:Basket, stock: Catalogue): string =>
         basketTotal += applyNormalPrice(totalNumberOfItem, item)
     }
   }
-  return basketTotal.toFixed(2);
+  return convertPriceInPenceToPound(basketTotal)
 };

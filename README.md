@@ -1,11 +1,13 @@
-# Getting Started with Create React App
+# CDL Basket Kata
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
+### `yarn install`
 
+Installs all the required dependencies for the project.
 ### `yarn start`
 
 Runs the app in the development mode.\
@@ -18,6 +20,19 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `yarn coverage`
+
+Launches the jest test runner in coverage mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `yarn e2e`
+
+Launches the cypress test runner.\
+NOTE: Application must be running on localhost port 3000 for the cypress framework to be able to run then tests.\
+      If you wish to use an alternative address amend the url in <root>/cypress/integration/Set Offers/setOffers.spec.ts\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
 
 ### `yarn build`
 

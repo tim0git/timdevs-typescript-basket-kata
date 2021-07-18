@@ -22,7 +22,7 @@ const StoreList: React.FC<Props> = ({ catalogue, addToBasket }) => {
                 ).toFixed(2)}`}</p>
               </>
             )}
-            <button aria-label={`add ${name} to basket`} onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => addToBasket(e, name)}>Add to Basket</button>
+            <button data-cy={`add ${name} to basket`} aria-label={`add ${name} to basket`} onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => addToBasket(e, name)}>Add to Basket</button>
           </div>
         );
       })}

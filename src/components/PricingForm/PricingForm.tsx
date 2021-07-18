@@ -35,13 +35,13 @@ const PricingForm: React.FC<Props> = ({ catalogue, setCatalogue, setPriceLoaded 
 
   return (
     <>
-      <p>Please set offers before shopping</p>
+      <p data-cy='Pricing Form Instruction'>Please set offers before shopping</p>
       <form className="pricingContainer">
         {Object.entries(stock).map((sku) => {
           return <SkuForm key={sku[0]} sku={sku} handleSetState={handleSetState} />;
         })}
         <br />
-        <button onClick={(e) => handleSubmit(e, stock)}>Submit</button>
+        <button data-cy="SubmitPricingForm" onClick={(e) => handleSubmit(e, stock)}>Submit</button>
       </form>
     </>
   );

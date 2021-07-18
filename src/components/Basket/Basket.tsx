@@ -14,7 +14,7 @@ const Basket: React.FC<Props> = ({ basket, stock, resetPricing }) => {
 
   return (
     <div>
-      <button onClick={resetPricing}>CheckOut</button>
+      <button onClick={resetPricing} data-cy='CheckOut Button'>CheckOut</button>
       <p aria-label='basket total in GBP'>Total cost of goods: £{calculateBasketTotal(basket, stock)}</p>
       <h2>Basket</h2>
       <div className="basketContainer">

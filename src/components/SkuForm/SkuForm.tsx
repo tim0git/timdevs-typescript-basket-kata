@@ -19,6 +19,7 @@ const SkuForm: React.FC<Props> =  ({ handleSetState, sku: [stockSku, values] }) 
           name="offer"
           value={values.offer}
           aria-label={`${stockSku} offer input`}
+          data-cy={`${stockSku} offer input`}
         />
       </label>
       <label>
@@ -30,6 +31,7 @@ const SkuForm: React.FC<Props> =  ({ handleSetState, sku: [stockSku, values] }) 
           name="minPurchase"
           value={values.minPurchase}
           aria-label={`${stockSku} minimum purchase input`}
+          data-cy={`${stockSku} minimum purchase input`}
         />
       </label>
     </div>
